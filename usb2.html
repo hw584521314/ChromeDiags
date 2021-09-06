@@ -1,0 +1,26 @@
+<html>
+   <head>
+
+   </head>
+   <body>
+   <!--iframe allowpaymentrequest allow="usb; fullscreen"-->
+<input  type="button" id="connectButton" value="Connect"/>
+<script>
+      let device;
+      const connectButton = document.getElementById('connectButton');
+connectButton.onclick = async () => {
+  device = await navigator.usb.requestDevice({
+    filters: [{ vendorId: 0x0951 }]
+  });
+  await device.open();
+  await device.selectConfiguration(1);
+  await device.claimInterface(0);
+  connected.style.display = 'block';
+  connectButton.style.display = 'none';
+  disconnectButton.style.display = 'initial';
+};
+   </script>
+
+   </body>
+   
+</html>
